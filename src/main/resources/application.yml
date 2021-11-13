@@ -1,0 +1,20 @@
+# =============================================
+# = Google Recaptcha configurations
+# = https://www.google.com/recaptcha/admin#list
+# =============================================
+google:
+  recaptcha:
+    url: https://www.google.com/recaptcha/api/siteverify
+    key: 6LcppSkdAAAAAA79aabMyS7jynrAkSobwMdOfZ4a
+    secret: 6LcppSkdAAAAADKHZb2-zTDc3MizV7fBuWkIOPnG
+
+
+# =============================================
+# = Logging configurations
+# =============================================
+logging:
+  level:
+    root: WARN
+    com.memorynotfound: DEBUG
+    org.springframework.web: INFO
+    org.springframework.security: INFO

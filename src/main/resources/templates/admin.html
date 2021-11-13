@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+
+    <title>Hello</title>
+</head>
+<body>
+    <form action="/search">
+        <button class="success">
+            Search Parking
+        </button>
+    </form>
+    <form method="post">
+        <label for="name">Parking name</label><input name="name" id="name"/>
+        <button class="success">Create</button>
+        <div th:if="${error}">
+            <div class="error-message">Name is required</div>
+        </div>
+    </form>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="parking : ${parkingList}">
+            <td>
+                <a th:text="${parking.id}" href="http://localhost:8090/forgot-password"></a>
+            </td>
+            <td th:text="${parking.name}"></td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>
