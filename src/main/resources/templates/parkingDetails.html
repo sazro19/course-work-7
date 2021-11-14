@@ -38,10 +38,9 @@
             padding-top: 15px;
             padding-bottom: 15px;
         }
-
         .navbar-inverse {
             background: #2d2d2d;
-            border-color: #2d2d2d;
+            border-color:  #2d2d2d;
         }
     </style>
 
@@ -55,27 +54,34 @@
     </nav>
 </header>
 <body>
-<form>
-    <label for="id">Parking UUID</label><input name="id" id="id"/>
-    <button class="success">Search</button>
-</form>
-<div th:if="${error}">
-    <div class="error-message" th:text="${error}"></div>
-</div>
 <div th:if="${parking}">
     <table class="table">
         <thead>
         <tr>
             <th>ID</th>
             <th>Name</th>
+            <th>Width</th>
+            <th>Height</th>
         </tr>
         </thead>
         <tbody>
         <tr>
+            <td th:text="${parking.id}"></td>
             <td>
-                <a th:text="${parking.id}" href="http://localhost:8090/forgot-password"></a>
+                <form method="post">
+                    <button class="success">Rename</button>
+                    <input th:value="${parking.name}" id="name" name="name"/>
+                    <input type="hidden" th:value="${parking.id}" id="idForDelete" name="idForRename"/>
+                </form>
             </td>
-            <td th:text="${parking.name}"></td>
+            <td th:text="${parking.width}"></td>
+            <td th:text="${parking.height}"></td>
+            <td>
+                <form action="/deleteParking" method="post">
+                    <button class="success error-message">Delete</button>
+                    <input type="hidden" th:value="${parking.id}" id="id" name="id"/>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>

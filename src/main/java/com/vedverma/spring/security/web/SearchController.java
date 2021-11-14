@@ -21,8 +21,14 @@ public class SearchController {
     public String search(@RequestParam(required = false) String id,
                          Model model) {
         if (id != null) {
-            model.addAttribute("parking", parkingService.getParkingById(UUID.fromString(id)).
-                    orElseThrow(IllegalArgumentException::new));
+            if (!id.isEmpty()) {
+                try {
+                    model.addAttribute("parking", parkingService.getParkingById(id)
+                            .orElseThrow(IllegalArgumentException::new));
+                } catch (IllegalArgumentException e) {
+                    model.addAttribute("error", "Cannot find parking with id: " + id);
+                }
+            }
         }
 
         return "searchParking";

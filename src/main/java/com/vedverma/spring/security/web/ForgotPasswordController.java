@@ -28,7 +28,7 @@ public class ForgotPasswordController {
 
     @PostMapping
     public String handleForgotPassword(@ModelAttribute("forgotPasswordForm") @Valid ForgotPasswordForm form,
-                                       BindingResult result, Model model, HttpServletRequest request){
+                                          BindingResult result, Model model, HttpServletRequest request){
 
         if (result.hasErrors()){
             return "forgot-password";

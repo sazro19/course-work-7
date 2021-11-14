@@ -11,7 +11,9 @@ import java.util.UUID;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder({
         "id",
-        "name"
+        "name",
+        "width",
+        "height"
 })
 public class Parking {
 
@@ -20,6 +22,12 @@ public class Parking {
 
     @JsonProperty("name")
     private String name;
+
+    @JsonProperty("width")
+    private Integer width;
+
+    @JsonProperty("height")
+    private Integer height;
 
     public UUID getId() {
         return id;
@@ -35,5 +43,21 @@ public class Parking {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getWidth() {
+        return width;
+    }
+
+    public void setWidth(Integer width) {
+        this.width = width;
+    }
+
+    public Integer getHeight() {
+        return height;
+    }
+
+    public void setHeight(Integer height) {
+        this.height = height;
     }
 }

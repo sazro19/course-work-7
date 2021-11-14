@@ -21,7 +21,11 @@ public class DefaultParkingService implements ParkingService {
 
     private static final String GET_PARKING = "http://localhost:8080/findParkingById?id=%s";
 
-    private static final String CREATE_PARKING = "http://localhost:8080/createParking?name=%s";
+    private static final String DELETE_PARKING = "http://localhost:8080/removeParkingById?id=%s";
+
+    private static final String RENAME_PARKING = "http://localhost:8080/renameParking?id=%s&name=%s";
+
+    private static final String CREATE_PARKING = "http://localhost:8080/createParking?name=%s&width=%s&height=%s";
 
     private static final Logger log = LoggerFactory.getLogger(DefaultParkingService.class);
 
@@ -35,38 +39,69 @@ public class DefaultParkingService implements ParkingService {
         List<Parking> parkingList = new ArrayList<>();
         try {
             parkingList = restTemplate.getForObject(uri, List.class);
-        } catch (Exception ignored){
+        } catch (Exception ignored) {
             log.error("Exception", ignored);
         }
         return parkingList;
     }
 
     @Override
-    public Optional<Parking> getParkingById(UUID id) {
+    public Optional<Parking> getParkingById(String id) {
         URI uri = URI.create(String.format(
                 GET_PARKING,
-                id.toString()
-                ));
+                id
+        ));
 
         try {
             Parking parking = restTemplate.getForObject(uri, Parking.class);
-            return Optional.of(parking);
-        } catch (Exception ignored){
+            return Optional.ofNullable(parking);
+        } catch (Exception ignored) {
             log.error("Exception", ignored);
         }
         return Optional.empty();
     }
 
     @Override
-    public void createParking(String name) {
+    public void createParking(String name, Integer width, Integer height) {
         URI uri = URI.create(String.format(
                 CREATE_PARKING,
+                name,
+                width,
+                height
+        ));
+
+        try {
+            restTemplate.getForObject(uri, Parking.class);
+        } catch (Exception ignored) {
+            log.error("Exception", ignored);
+        }
+    }
+
+    @Override
+    public void deleteParking(String id) {
+        URI uri = URI.create(String.format(
+                DELETE_PARKING,
+                id
+        ));
+
+        try {
+            restTemplate.getForObject(uri, Parking.class);
+        } catch (Exception ignored) {
+            log.error("Exception", ignored);
+        }
+    }
+
+    @Override
+    public void renameParking(String id, String name) {
+        URI uri = URI.create(String.format(
+                RENAME_PARKING,
+                id,
                 name
         ));
 
         try {
             restTemplate.getForObject(uri, Parking.class);
-        } catch (Exception ignored){
+        } catch (Exception ignored) {
             log.error("Exception", ignored);
         }
     }
