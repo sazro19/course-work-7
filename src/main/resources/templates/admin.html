@@ -65,7 +65,7 @@
             <span class="input-group-text" id="inputGroup-sizing-sm1">Name</span>
         </div>
         <input type="text" aria-label="Name" name="name" id="name" class="form-control"
-               aria-describedby="inputGroup-sizing-sm1"/>
+               aria-describedby="inputGroup-sizing-sm1" style="max-width: 30%"/>
         <div th:if="${errors}">
             <div class="error-message" th:text="${errors.get('name')} ? ${errors.get('name')} : ''"></div>
         </div>
@@ -75,7 +75,7 @@
             <span class="input-group-text" id="inputGroup-sizing-sm2">Width</span>
         </div>
         <input aria-label="small" name="width" id="width" class="form-control"
-               aria-describedby="inputGroup-sizing-sm2"/>
+               aria-describedby="inputGroup-sizing-sm2" style="max-width: 30%"/>
         <div th:if="${errors}">
             <div class="error-message" th:text="${errors.get('width')} ? ${errors.get('width')} : ''"></div>
         </div>
@@ -85,7 +85,7 @@
             <span class="input-group-text" id="inputGroup-sizing-sm3">Height</span>
         </div>
         <input aria-label="small" name="height" id="height" class="form-control"
-               aria-describedby="inputGroup-sizing-sm3"/>
+               aria-describedby="inputGroup-sizing-sm3" style="max-width: 30%"/>
         <div th:if="${errors}">
             <div class="error-message" th:text="${errors.get('height')} ? ${errors.get('height')} : ''"></div>
         </div>

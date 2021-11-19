@@ -38,9 +38,10 @@
             padding-top: 15px;
             padding-bottom: 15px;
         }
+
         .navbar-inverse {
             background: #2d2d2d;
-            border-color:  #2d2d2d;
+            border-color: #2d2d2d;
         }
     </style>
 
@@ -82,6 +83,80 @@
                     <input type="hidden" th:value="${parking.id}" id="id" name="id"/>
                 </form>
             </td>
+        </tr>
+        </tbody>
+    </table>
+    <h3>Parking Units</h3>
+    <form th:object="${newParkingUnitForm}" action="/parkingDetails/saveParking" method="post">
+        <input type="hidden" name="parkingId" id="parkingId" th:value="${parking.id}"/>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm1">Floor</span>
+            </div>
+            <input type="text" aria-label="Floor" name="floor" class="form-control"
+                   aria-describedby="inputGroup-sizing-sm1" style="max-width: 30%"/>
+            <div th:if="${errors}">
+                <div class="error-message" th:text="${errors.get('floor')} ? ${errors.get('floor')} : ''"></div>
+            </div>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm2">Section</span>
+            </div>
+            <input aria-label="small" name="section" id="section" class="form-control"
+                   aria-describedby="inputGroup-sizing-sm2" style="max-width: 30%"/>
+            <div th:if="${errors}">
+                <div class="error-message" th:text="${errors.get('section')} ? ${errors.get('section')} : ''"></div>
+            </div>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm3">Cell</span>
+            </div>
+            <input aria-label="small" name="cell" class="form-control"
+                   aria-describedby="inputGroup-sizing-sm3" style="max-width: 30%"/>
+            <div th:if="${errors}">
+                <div class="error-message" th:text="${errors.get('cell')} ? ${errors.get('cell')} : ''"></div>
+            </div>
+        </div>
+        <div class="input-group mb-3">
+            <label for="type">Type</label><select name="type" id="type">
+                <option value="LOT">Lot</option>
+                <option value="EXIT">Exit</option>
+                <option value="ROAD">Road</option>
+            </select>
+        </div>
+        <div class="input-group mb-3">
+            <label for="status">Status</label><select name="status" id="status">
+                <option value="FREE">Free</option>
+                <option value="AWAITS_CAR">Awaits car</option>
+                <option value="BUSY">Busy</option>
+                <option value="ERROR">Error</option>
+            </select>
+        </div>
+
+        <button class="success">Create</button>
+        <div th:if="${errors}">
+            <div class="error-message">Errors</div>
+        </div>
+    </form>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Floor</th>
+            <th>Section</th>
+            <th>Cell</th>
+            <th>Type</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="parkingUnit : ${parkingUnitList}">
+            <td th:text="${parkingUnit.floor}"></td>
+            <td th:text="${parkingUnit.section}"></td>
+            <td th:text="${parkingUnit.cell}"></td>
+            <td th:text="${parkingUnit.type}"></td>
+            <td th:text="${parkingUnit.status}"></td>
         </tr>
         </tbody>
     </table>
