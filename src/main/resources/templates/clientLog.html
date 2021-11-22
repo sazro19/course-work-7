@@ -55,30 +55,37 @@
     </nav>
 </header>
 <body>
-<form>
-    <label for="id">Parking UUID</label><input name="id" id="id"/>
-    <button class="btn btn-success">Search</button>
-</form>
-<div th:if="${error}">
-    <div class="error-message" th:text="${error}"></div>
+<div>
+    <form>
+        <label>
+            <input type="date" id="from" name="from"/>
+        </label>
+        <p class="h3">To</p>
+        <label>
+            <input type="date" id="to" name="to"/>
+        </label>
+        <button class="btn btn-success">Search</button>
+    </form>
 </div>
-<div th:if="${parking}">
-    <table class="table">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>
-                <a class="btn-link" th:text="${parking.id}" href="http://localhost:8090/forgot-password"></a>
-            </td>
-            <td th:text="${parking.name}"></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Amount</th>
+        <th>Client Id</th>
+        <th>Time</th>
+        <th>Lot Id</th>
+        <th>Parking Id</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="log : ${clientLogs}">
+        <td th:text="${log.amount}"></td>
+        <td th:text="${log.clientIdentifier}"></td>
+        <td th:text="${log.time}"></td>
+        <td th:text="${log.lotId}"></td>
+        <td th:text="${log.parkingId}"></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

@@ -70,7 +70,7 @@
             <td th:text="${parking.id}"></td>
             <td>
                 <form method="post">
-                    <button class="success">Rename</button>
+                    <button class="btn btn-primary">Rename</button>
                     <input th:value="${parking.name}" id="name" name="name"/>
                     <input type="hidden" th:value="${parking.id}" id="idForDelete" name="idForRename"/>
                 </form>
@@ -79,14 +79,16 @@
             <td th:text="${parking.height}"></td>
             <td>
                 <form action="/deleteParking" method="post">
-                    <button class="success error-message">Delete</button>
+                    <button class="btn btn-danger">Delete</button>
                     <input type="hidden" th:value="${parking.id}" id="id" name="id"/>
                 </form>
             </td>
         </tr>
         </tbody>
     </table>
-    <h3>Parking Units</h3>
+    <div>
+        <p class="h1">Create parking unit</p>
+    </div>
     <form th:object="${newParkingUnitForm}" action="/parkingDetails/saveParking" method="post">
         <input type="hidden" name="parkingId" id="parkingId" th:value="${parking.id}"/>
         <div class="input-group mb-3">
@@ -104,7 +106,7 @@
                 <span class="input-group-text" id="inputGroup-sizing-sm2">Section</span>
             </div>
             <input aria-label="small" name="section" id="section" class="form-control"
-                   aria-describedby="inputGroup-sizing-sm2" style="max-width: 30%"/>
+                   aria-describedby="inputGroup-sizing-sm2" style="max-width: 29%"/>
             <div th:if="${errors}">
                 <div class="error-message" th:text="${errors.get('section')} ? ${errors.get('section')} : ''"></div>
             </div>
@@ -114,20 +116,20 @@
                 <span class="input-group-text" id="inputGroup-sizing-sm3">Cell</span>
             </div>
             <input aria-label="small" name="cell" class="form-control"
-                   aria-describedby="inputGroup-sizing-sm3" style="max-width: 30%"/>
+                   aria-describedby="inputGroup-sizing-sm3" style="max-width: 31%"/>
             <div th:if="${errors}">
                 <div class="error-message" th:text="${errors.get('cell')} ? ${errors.get('cell')} : ''"></div>
             </div>
         </div>
         <div class="input-group mb-3">
-            <label for="type">Type</label><select name="type" id="type">
+            <label for="type">Type</label><select class="custom-select" name="type" id="type" style="max-width: 11%">
                 <option value="LOT">Lot</option>
                 <option value="EXIT">Exit</option>
                 <option value="ROAD">Road</option>
             </select>
         </div>
         <div class="input-group mb-3">
-            <label for="status">Status</label><select name="status" id="status">
+            <label for="status">Status</label><select class="custom-select" name="status" id="status" style="max-width: 10%">
                 <option value="FREE">Free</option>
                 <option value="AWAITS_CAR">Awaits car</option>
                 <option value="BUSY">Busy</option>
@@ -135,11 +137,14 @@
             </select>
         </div>
 
-        <button class="success">Create</button>
+        <button class="btn btn-primary">Create</button>
         <div th:if="${errors}">
             <div class="error-message">Errors</div>
         </div>
     </form>
+    <div>
+        <p class="h1">Parking units</p>
+    </div>
     <table class="table">
         <thead>
         <tr>

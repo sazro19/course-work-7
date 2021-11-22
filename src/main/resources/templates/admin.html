@@ -38,9 +38,10 @@
             padding-top: 15px;
             padding-bottom: 15px;
         }
+
         .navbar-inverse {
             background: #2d2d2d;
-            border-color:  #2d2d2d;
+            border-color: #2d2d2d;
         }
     </style>
 
@@ -54,48 +55,59 @@
     </nav>
 </header>
 <body>
+<div>
+    <div>
+        <p class="h1">Create parking</p>
+    </div>
+    <form th:object="${newParkingForm}" method="post">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm1">Name</span>
+            </div>
+            <input type="text" aria-label="Name" name="name" id="name" class="form-control"
+                   aria-describedby="inputGroup-sizing-sm1" style="max-width: 30%"/>
+            <div th:if="${errors}">
+                <div class="error-message" th:text="${errors.get('name')} ? ${errors.get('name')} : ''"></div>
+            </div>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm2">Width</span>
+            </div>
+            <input aria-label="small" name="width" id="width" class="form-control"
+                   aria-describedby="inputGroup-sizing-sm2" style="max-width: 30%"/>
+            <div th:if="${errors}">
+                <div class="error-message" th:text="${errors.get('width')} ? ${errors.get('width')} : ''"></div>
+            </div>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm3">Height</span>
+            </div>
+            <input aria-label="small" name="height" id="height" class="form-control"
+                   aria-describedby="inputGroup-sizing-sm3" style="max-width: 30%"/>
+            <div th:if="${errors}">
+                <div class="error-message" th:text="${errors.get('height')} ? ${errors.get('height')} : ''"></div>
+            </div>
+        </div>
+
+        <button class="btn btn-primary" style="max-width: 40%">Create</button>
+        <div th:if="${errors}">
+            <div class="error-message">Errors</div>
+        </div>
+    </form>
+</div>
 <form action="/search">
-    <button class="success">
+    <button class="btn btn-primary" style="max-width: 40%">
         Search Parking
     </button>
 </form>
-<form th:object="${newParkingForm}" method="post">
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-sm1">Name</span>
-        </div>
-        <input type="text" aria-label="Name" name="name" id="name" class="form-control"
-               aria-describedby="inputGroup-sizing-sm1" style="max-width: 30%"/>
-        <div th:if="${errors}">
-            <div class="error-message" th:text="${errors.get('name')} ? ${errors.get('name')} : ''"></div>
-        </div>
-    </div>
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-sm2">Width</span>
-        </div>
-        <input aria-label="small" name="width" id="width" class="form-control"
-               aria-describedby="inputGroup-sizing-sm2" style="max-width: 30%"/>
-        <div th:if="${errors}">
-            <div class="error-message" th:text="${errors.get('width')} ? ${errors.get('width')} : ''"></div>
-        </div>
-    </div>
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-sm3">Height</span>
-        </div>
-        <input aria-label="small" name="height" id="height" class="form-control"
-               aria-describedby="inputGroup-sizing-sm3" style="max-width: 30%"/>
-        <div th:if="${errors}">
-            <div class="error-message" th:text="${errors.get('height')} ? ${errors.get('height')} : ''"></div>
-        </div>
-    </div>
-
-    <button class="success">Create</button>
-    <div th:if="${errors}">
-        <div class="error-message">Errors</div>
-    </div>
+<form action="/clientLog">
+    <button class="btn btn-success" style="max-width: 40%">Client logs</button>
 </form>
+<div>
+    <p class="h1">Parking List</p>
+</div>
 <table class="table">
     <thead>
     <tr>
@@ -108,14 +120,14 @@
     <tbody>
     <tr th:each="parking : ${parkingList}">
         <td>
-            <a th:text="${parking.id}" th:href="${'http://localhost:8090/parkingDetails?id='} + ${parking.id}"></a>
+            <a class="btn-link" th:text="${parking.id}" th:href="${'http://localhost:8090/parkingDetails?id='} + ${parking.id}"></a>
         </td>
         <td th:text="${parking.name}"></td>
         <td th:text="${parking.width}"></td>
         <td th:text="${parking.height}"></td>
         <td>
             <form action="/deleteParking" method="post">
-                <button class="success error-message">Delete</button>
+                <button class="btn btn-danger">Delete</button>
                 <input type="hidden" th:value="${parking.id}" id="id" name="id"/>
             </form>
         </td>
