@@ -57,6 +57,7 @@
 <body>
 <div>
     <form>
+        <p class="h3">From</p>
         <label>
             <input type="date" id="from" name="from"/>
         </label>
@@ -65,12 +66,16 @@
             <input type="date" id="to" name="to"/>
         </label>
         <button class="btn btn-success">Search</button>
+        <p class="h3">Total income:</p>
+        <label th:text="${total + ' $'}"></label>
+        <span>
+        </span>
     </form>
 </div>
 <table class="table">
     <thead>
     <tr>
-        <th>Amount</th>
+        <th>Amount($)</th>
         <th>Client Id</th>
         <th>Time</th>
         <th>Lot Id</th>
@@ -81,7 +86,7 @@
     <tr th:each="log : ${clientLogs}">
         <td th:text="${log.amount}"></td>
         <td th:text="${log.clientIdentifier}"></td>
-        <td th:text="${log.time}"></td>
+        <td th:text="${log.formatted}"></td>
         <td th:text="${log.lotId}"></td>
         <td th:text="${log.parkingId}"></td>
     </tr>

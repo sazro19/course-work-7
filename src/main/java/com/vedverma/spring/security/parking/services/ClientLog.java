@@ -1,12 +1,10 @@
 package com.vedverma.spring.security.parking.services;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.*;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -16,7 +14,8 @@ import java.util.UUID;
         "clientIdentifier",
         "time",
         "lotId",
-        "parkingId"
+        "parkingId",
+        "formatted"
 })
 public class ClientLog {
 
@@ -27,7 +26,7 @@ public class ClientLog {
     private String clientIdentifier;
 
     @JsonProperty("time")
-    private Date time;
+    private LocalDateTime time;
 
     @JsonProperty("lotId")
     private UUID lotId;
@@ -43,12 +42,15 @@ public class ClientLog {
         this.amount = amount;
     }
 
-    public Date getTime() {
+    public LocalDateTime getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(LocalDateTime time) {
         this.time = time;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        String formatDateTime = time.format(formatter);
+        this.formatted = formatDateTime;
     }
 
     public UUID getLotId() {
@@ -73,5 +75,16 @@ public class ClientLog {
 
     public void setClientIdentifier(String clientIdentifier) {
         this.clientIdentifier = clientIdentifier;
+    }
+
+    @JsonProperty("formatted")
+    private String formatted;
+
+    public String getFormatted() {
+        return formatted;
+    }
+
+    public void setFormatted(String formatted) {
+        this.formatted = formatted;
     }
 }

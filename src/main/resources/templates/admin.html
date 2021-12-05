@@ -103,7 +103,7 @@
     </button>
 </form>
 <form action="/clientLog">
-    <button class="btn btn-success" style="max-width: 40%">Client logs</button>
+    <button class="btn btn-success" style="min-width: 9.6%">Client logs</button>
 </form>
 <div>
     <p class="h1">Parking List</p>
@@ -120,7 +120,8 @@
     <tbody>
     <tr th:each="parking : ${parkingList}">
         <td>
-            <a class="btn-link" th:text="${parking.id}" th:href="${'http://localhost:8090/parkingDetails?id='} + ${parking.id}"></a>
+            <a class="btn-link" th:text="${parking.id}"
+               th:href="${'http://localhost:8090/parkingDetails?id='} + ${parking.id}"></a>
         </td>
         <td th:text="${parking.name}"></td>
         <td th:text="${parking.width}"></td>

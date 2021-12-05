@@ -83,6 +83,11 @@
                     <input type="hidden" th:value="${parking.id}" id="id" name="id"/>
                 </form>
             </td>
+            <td>
+                <form th:action="${'http://localhost:8090/clientLog/'} + ${parking.id}">
+                    <button class="btn btn-success">Parking logs</button>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>
